@@ -5,16 +5,15 @@ import AnswerBox from "./AnswerBox";
 export class SearchBar extends React.Component{
 	constructor() {
 		super();
-		this.myRef = React.createRef();
 		this.state = {
 			query: "",
 			results: [],
 			answer: [],
-			cursor: 0
+			//cursor: 0
 		}
 		this.handleChange = this.handleChange.bind(this)
 		this.getData = this.getData.bind(this)
-		this.handleKeyDown = this.handleKeyDown.bind(this)
+		//this.handleKeyDown = this.handleKeyDown.bind(this)
 	}
 
 	componentDidMount(){
@@ -54,23 +53,23 @@ export class SearchBar extends React.Component{
 			})	//console.log(this.state.results)
 	}
 
-	handleKeyDown(event){
-		console.log(this.myRef.current)
-		let feedback = this.myRef.current.focus()
-		console.log("feedback ", feedback)
-		const {cursor, results} = this.state
-		console.log(event.key)
-		console.log(this.state.cursor)
-		if(event.key === 'ArrowUp' && cursor > 0){
-			this.setState(prevState => ({
-				cursor: prevState.cursor - 1
-			}))
-		} else if (event.key === 'ArrowDown' && cursor < results.length -1){
-			this.setState (prevState => ({
-				cursor: prevState.cursor +1
-			}))
-		}
-	}
+	// Figure out key change/focus
+
+	// handleKeyDown(event){
+	// 	const {cursor, results} = this.state
+	// 	console.log(event.key)
+	// 	console.log(this.state.cursor)
+	// 	if(event.key === 'ArrowUp' && cursor > 0){
+	// 		this.myRef
+	// 		this.setState(prevState => ({
+	// 			cursor: prevState.cursor - 1
+	// 		}))
+	// 	} else if (event.key === 'ArrowDown' && cursor < results.length -1){
+	// 		this.setState (prevState => ({
+	// 			cursor: prevState.cursor +1
+	// 		}))
+	// 	}
+	// }
 
 	getData(value, number){
 		console.log(value)
@@ -82,6 +81,8 @@ export class SearchBar extends React.Component{
 			index: number
 		})
 	}
+
+	//if want input to be placed in a form?
 
 	// handleSubmit = (event) => {
 	// 	event.preventDefault();
@@ -107,15 +108,15 @@ export class SearchBar extends React.Component{
 			<div>
 	    	<table>
 	    	<tbody>
-	    	<tr ref={this.myRef}>
+	    	<tr>
 	    	<td>
 	        	<input
 	          		type="text"
-	          		//autoFocus
+	          		autoFocus
 	          		value = {this.state.query}
 					placeholder = "Search for a product, brand, or location to buy..."
 					onChange = {this.handleChange}
-					onKeyDown={this.handleKeyDown}
+					//onKeyDown={this.handleKeyDown}
 	        	/>
 	        </td>
 	        </tr>
